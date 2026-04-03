@@ -83,7 +83,7 @@ body {
 .chart {
     height: 200px;
     box-shadow: 0 4px 12px rgba(11, 11, 11, 0.08);
-
+    border-radius: 10px;
 }
 
 /* Category chart */
@@ -99,9 +99,11 @@ body {
     flex-direction: column;
     gap: 20px;
 }
+
 .category-chart {
     padding: 20px;
 }
+
 .category-title {
     width: 35px;
 }
@@ -144,11 +146,13 @@ body {
 .trend-chart {
     padding: 20px;
 }
-.trendBar{
+
+.trendBar {
     background-color: #2563EB;
-    
+
 
 }
+
 .jan-trendBar {
     height: 90px;
     width: 30px;
@@ -165,19 +169,41 @@ body {
     height: 45px;
     width: 30px;
 }
-.mar-trendBar{
+
+.mar-trendBar {
     height: 45px;
     width: 30px;
 }
-.apr-trendBar{
+
+.apr-trendBar {
     height: 45px;
     width: 30px;
 }
-.may-trendBar{
+
+.may-trendBar {
     height: 45px;
     width: 30px;
 }
-.jun-trendBar{
+
+.jun-trendBar {
     height: 45px;
     width: 30px;
+}
+
+/* Insights */
+.insights {
+    height: 120px;
+    box-shadow: 0 4px 12px rgba(11, 11, 11, 0.08);
+    margin-top: 70px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.insight-title {
+    font-weight: bold;
+    font-size: large;
+}
+
+.insight-info {
+    margin-top: 20px;
 }
