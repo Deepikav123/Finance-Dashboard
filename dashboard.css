@@ -20,3 +20,44 @@ body{
 .role{
  padding: 7px 20px;
 }
+
+/* body-content */
+.body-content{
+    margin: 20px;
+}
+
+/* Summary-cards */
+
+.summary-cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    gap:20px ;
+
+}
+
+.summary-card{
+    height: 60px;
+    height: 100px;
+    padding: 15px;
+   box-shadow: 0 4px 12px rgba(11, 11, 11, 0.08);
+   border-radius: 10px;
+}
+.balance-value{
+    font-size: xx-large;
+}
+.income-value,.expenses-value{
+font-size: x-large;
+}
+
+.income-value{
+    color:  #16A34A;
+}
+.expenses-value{
+    color: #DC2626;
+
+}
+.value{
+    padding-top:15px ;
+    
+}
