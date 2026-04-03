@@ -1,0 +1,22 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    background-color:  #F8FAFC;
+}
+
+/* Nav-bar */
+.navbar{
+    display: flex;
+   justify-content: space-between;
+   background-color: #2563EB;
+   color: white;
+   padding: 20px;
+   align-items: center;
+}
+.navbar-title{
+    font-weight: bold;
+    font-size: xx-large;
+}
+.role{
+ padding: 7px 20px;
+}
