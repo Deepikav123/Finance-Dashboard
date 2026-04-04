@@ -1,5 +1,6 @@
-const transactionData = JSON.parse(localStorage.getItem('data')) || [];
-// Loacl Storage
+import { tableData } from "./dashboard.js";
+export const transactionData = JSON.parse(localStorage.getItem('data')) || [];
+// Local Storage
 function Storage() {
     localStorage.setItem('data', JSON.stringify(transactionData));
 }
@@ -21,18 +22,34 @@ export function storeData() {
     // Date value
     const date = document.querySelector('.date-input');
     const dateValue = date.value;
-    transactionData.push({
-        transactionAmount: amountValue,
-        transactionCategory: categoryValue,
-        transactionType: typeValue,
-        transactionDate: dateValue
-    });
+
+    // Form Validation
+    if (amountValue <= 0 || !amountValue) {
+        alert("Please enter valid amount");
+        return;
+    }
+    else if (!dateValue) {
+        alert("Please enter valid date");
+        return;
+    }
+    else {
+        transactionData.push({
+            transactionAmount: amountValue,
+            transactionCategory: categoryValue,
+            transactionType: typeValue,
+            transactionDate: dateValue
+        });
+        tableData();
+        document.querySelector('.transactions').classList.remove('toggle');
+    }
+
     Storage();
 
     // Clear the form
-    amount.value = ' ';
-    category.value = ' ';
-    type.value = ' ';
-    date.value = ' ';
+    amount.value = '';
+    category.value = '';
+    type.value = '';
+    date.value = '';
 
 }
+
