@@ -1,3 +1,4 @@
+import { storeData } from "./transaction.js";
 // Add Button
 document.querySelector('.addButton').addEventListener('click',()=>{
     document.querySelector('.transactions').classList.add('toggle');
@@ -5,6 +6,7 @@ document.querySelector('.addButton').addEventListener('click',()=>{
 
 // Submit button
 document.querySelector('.submit-button').addEventListener('click',()=>{
+    storeData();
     document.querySelector('.transactions').classList.remove('toggle');
 })
 

@@ -44,6 +44,7 @@ body {
     padding: 15px;
     box-shadow: 0 4px 12px rgba(11, 11, 11, 0.08);
     border-radius: 10px;
+    background-color: white;
 }
 
 .balance-value {
@@ -84,6 +85,7 @@ body {
     height: 200px;
     box-shadow: 0 4px 12px rgba(11, 11, 11, 0.08);
     border-radius: 10px;
+    background-color: white;
 }
 
 /* Category chart */
@@ -197,6 +199,7 @@ body {
     margin-top: 70px;
     padding: 20px;
     border-radius: 10px;
+    background-color: white;
 }
 
 .insight-title {
@@ -214,6 +217,7 @@ body {
     border: 2px solid;
     /* height: 300px; */
     margin-top: 70px;
+    background-color: white;
 }
 .transactions-header{
     font-weight: bold;
