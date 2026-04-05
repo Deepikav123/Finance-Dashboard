@@ -193,8 +193,11 @@ body {
     align-items: center;
     justify-content: space-between;
 }
-
+.roleBased .addButton{
+    display: initial;
+}
 .addButton {
+    display: none;
     background-color: green;
     color: white;
     padding: 10px 25px;
@@ -221,7 +224,7 @@ body {
 
 
 /* Transaction Table */
-.transaction-table {}
+
 
 .table-heading {
     font-weight: bold;

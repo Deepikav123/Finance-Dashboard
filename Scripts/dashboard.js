@@ -1,4 +1,23 @@
 import { storeData, transactionData } from "./transaction.js";
+
+// Role based Access
+
+function Role() {
+    const role = document.querySelector('.role');
+    if(role.value=='Admin'){
+        document.querySelector('.dashboard').classList.add('roleBased');
+    }
+    else{
+        document.querySelector('.dashboard').classList.remove('roleBased');
+
+    }
+}
+Role();
+
+document.querySelector('.role').addEventListener('click',()=>{
+Role();
+})
+
 //  SummaryCard
 function IncomeAndExpense() {
 
@@ -28,7 +47,7 @@ function IncomeAndExpense() {
 function SummaryCards() {
     const incomeAndExpenseDetails = IncomeAndExpense();
     const balance = incomeAndExpenseDetails.income - incomeAndExpenseDetails.expense;
-    document.querySelector('.balance-value').innerHTML = `${balance<0?'-':''}₹${Math.abs(balance)}`;
+    document.querySelector('.balance-value').innerHTML = `${balance < 0 ? '-' : ''}₹${Math.abs(balance)}`;
     document.querySelector('.income-value').innerHTML = `₹${incomeAndExpenseDetails.income}`;
     document.querySelector('.expenses-value').innerHTML = `₹${incomeAndExpenseDetails.expense}`;
 
@@ -101,7 +120,6 @@ function categoryChart() {
     `;
 
     document.querySelector('.category-container').innerHTML = categoryCard;
-    console.log(categoryCard);
 }
 categoryChart();
 
@@ -186,7 +204,6 @@ function monthlyTrend() {
                                 <div class="trend-month">Jun</div>
                             </div>`
     document.querySelector('.trend-info').innerHTML = trendCard;
-    console.log(trendCard);
 }
 monthlyTrend();
 
@@ -276,4 +293,3 @@ export function tableData() {
     document.querySelector('.transaction-table-data').innerHTML = html;
 }
 tableData();
-console.log(transactionData);
