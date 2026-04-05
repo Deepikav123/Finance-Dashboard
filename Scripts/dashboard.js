@@ -4,18 +4,18 @@ import { storeData, transactionData } from "./transaction.js";
 
 function Role() {
     const role = document.querySelector('.role');
-    if(role.value=='Admin'){
+    if (role.value == 'Admin') {
         document.querySelector('.dashboard').classList.add('roleBased');
     }
-    else{
+    else {
         document.querySelector('.dashboard').classList.remove('roleBased');
 
     }
 }
 Role();
 
-document.querySelector('.role').addEventListener('click',()=>{
-Role();
+document.querySelector('.role').addEventListener('click', () => {
+    Role();
 })
 
 //  SummaryCard
@@ -75,8 +75,8 @@ function categoryMaximum() {
             shopping += Number(ele.transactionAmount);
         }
     })
-    let maximum = food;
-    let maximumCategory = 'Food';
+    let maximum =0;
+    let maximumCategory = 'None';
     if (travel > food) {
         maximum = travel;
         maximumCategory = 'Travel';
@@ -213,7 +213,7 @@ function Insights() {
     const maxCategory = categoryMaximum();
     let monthDetail = monthDetails();
     const incomeAndExpenseDetails = IncomeAndExpense();
-    const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    const month = ['January', 'February', 'March', 'April', 'May', 'June'];
     insightCard = `
      <div class="insight-category">
                             Highest Spendings-<strong>${maxCategory.maximumCategory}</strong>
@@ -248,36 +248,37 @@ document.querySelector('.submit-button').addEventListener('click', () => {
 document.querySelector('.cancel-button').addEventListener('click', () => {
     document.querySelector('.overlay').classList.remove('toggle');
 })
-/*
-// Filters
 
-// Type-filter
-document.querySelector('.type-filter').addEventListener('click', () => {
-    const type = document.querySelector('.type-filter');
-    const typeValue = type.value;
-    const newType = transactionData.filter((f) => {
-        if (typeValue == 'all') {
-            return true;
-        }
-        else if (f.transactionType == typeValue) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    })
-    console.log(newType);
-    tableData(newType);
-})
 
-// Category-filter
-document.querySelector('.category-filter').addEventListener('click', () => {
+function Filter() {
+
     const category = document.querySelector('.category-filter');
     const categoryValue = category.value;
-    console.log(categoryValue);
+
+    
+    const type = document.querySelector('.type-filter');
+    const typeValue = type.value;
+
+    const newCategory = transactionData.filter((f) => {
+        if ((categoryValue == f.transactionCategory || categoryValue == 'category')&&(f.transactionType == typeValue || typeValue == 'all') ) {
+            return true;
+        }
+    })
+    return newCategory;
+}
+
+
+document.querySelector('.type-filter').addEventListener('click', () => {
+    const type = Filter();
+    tableData(type);
 })
-*/
-export function tableData() {
+document.querySelector('.category-filter').addEventListener('click', () => {
+    const category = Filter();
+    tableData(category);
+})
+
+export function tableData(transactionData) {
+
     let html = ``;
     transactionData.forEach((ele) => {
         html += `
@@ -292,4 +293,5 @@ export function tableData() {
     })
     document.querySelector('.transaction-table-data').innerHTML = html;
 }
-tableData();
+tableData(transactionData);
+console.log(transactionData);

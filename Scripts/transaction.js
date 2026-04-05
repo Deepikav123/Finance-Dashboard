@@ -34,12 +34,13 @@ export function storeData() {
     }
     else {
         transactionData.push({
+            transactionId:crypto.randomUUID(),
             transactionAmount: amountValue,
             transactionCategory: categoryValue,
             transactionType: typeValue,
             transactionDate: dateValue
         });
-        tableData();
+        tableData(transactionData);
         document.querySelector('.overlay').classList.remove('toggle');
     }
 
