@@ -1,6 +1,6 @@
 import { storeData, transactionData } from "./transaction.js";
 //  SummaryCard
-function SummaryCards() {
+function IncomeAndExpense() {
 
     let income = 0;
     let expense = 0;
@@ -12,15 +12,31 @@ function SummaryCards() {
             expense += Number(ele.transactionAmount);
         }
     })
-    document.querySelector('.balance-value').innerHTML = `₹${income - expense}`;
-    document.querySelector('.income-value').innerHTML = `₹${income}`;
-    document.querySelector('.expenses-value').innerHTML = `₹${expense}`;
+    let majority;
+    if (income > expense) {
+        majority = 'income';
+    }
+    else {
+        majority = 'expense';
+    }
+    return {
+        income,
+        expense,
+        majority
+    };
+}
+function SummaryCards() {
+    const incomeAndExpenseDetails = IncomeAndExpense();
+    const balance = incomeAndExpenseDetails.income - incomeAndExpenseDetails.expense;
+    document.querySelector('.balance-value').innerHTML = `${balance<0?'-':''}₹${Math.abs(balance)}`;
+    document.querySelector('.income-value').innerHTML = `₹${incomeAndExpenseDetails.income}`;
+    document.querySelector('.expenses-value').innerHTML = `₹${incomeAndExpenseDetails.expense}`;
 
 }
 SummaryCards();
 
-// Category Chart
-function categoryChart() {
+
+function categoryMaximum() {
     let foodCategory = 'food';
     let travelCategory = 'travel';
     let shoppingCategory = 'shopping';
@@ -41,43 +57,57 @@ function categoryChart() {
         }
     })
     let maximum = food;
+    let maximumCategory = 'Food';
     if (travel > food) {
         maximum = travel;
+        maximumCategory = 'Travel';
+
     }
     else if (shopping > food) {
         maximum = shopping;
+        maximumCategory = 'Shopping';
+
     }
 
+    return {
+        food,
+        travel,
+        shopping,
+        maximum,
+        maximumCategory
+    };
+}
+// Category Chart
+function categoryChart() {
+    const categoryObject = categoryMaximum();
     let categoryCard = `
        <div class="food-category">
                                 <div class="food-title category-title">Food</div>
-                                <div class="food-bar bar" style="width:${(food / maximum) * 100}%;"></div>
-                                <span class="category-amount">₹${food}</span>
+                                <div class="food-bar bar" style="width:${Math.floor((categoryObject.food / categoryObject.maximum) * 100)}%;"></div>
+                                <span class="category-amount">₹${categoryObject.food}</span>
                             </div>
                             <div class="travel-category">
                                 <div class="travel-title category-title">Travel</div>
-                                <div class="travel-bar bar" style="width:${(travel / maximum) * 100}%;"></div>
-                                <span class="category-amount">₹${travel}</span>
+                                <div class="travel-bar bar" style="width:${Math.floor((categoryObject.travel / categoryObject.maximum) * 100)}%;"></div>
+                                <span class="category-amount">₹${categoryObject.travel}</span>
 
                             </div>
                             <div class="shopping-category">
                                 <div class="shopping-title category-title">Shopping</div>
-                                <div class="shopping-bar bar" style="width:${(shopping / maximum) * 100}%;" ></div>
-                                <span class="category-amount">₹${shopping}</span>
+                                <div class="shopping-bar bar" style="width:${Math.floor((categoryObject.shopping / categoryObject.maximum) * 100)}%;" ></div>
+                                <span class="category-amount">₹${categoryObject.shopping}</span>
 
                             </div>
     `;
 
     document.querySelector('.category-container').innerHTML = categoryCard;
+    console.log(categoryCard);
 }
 categoryChart();
 
 
 // Monthly trend
-function monthlyTrend() {
-
-
-    let trendCard = ``;
+function monthDetails() {
 
     let months = [0, 0, 0, 0, 0, 0];
 
@@ -98,57 +128,89 @@ function monthlyTrend() {
 
         }
     })
-
+    let maxiIndex = 0;
     let maxi = Math.abs(months[0]);
     for (let i = 1; i < months.length; i++) {
         if (maxi < Math.abs(months[i])) {
             maxi = Math.abs(months[i]);
+            maxiIndex = i;
         }
     }
-    console.log((Math.abs(months[4])/maxi ) * 100);
-    trendCard = ` <div class="jan trend">
-                                <div class="trend-amount">₹${Math.abs(months[0])}</div>
-                                <div class="jan-trendBar trendBar" style="background-color:${months[0] < 0 ? "red" : "green"};
-                                height:${(Math.abs(months[0])) * 100}%;"></div>
+
+    return {
+        months,
+        maxi,
+        maxiIndex
+    };
+}
+
+function monthlyTrend() {
+
+    let monthDetail = monthDetails();
+
+    let trendCard = ` <div class="jan trend">
+                                <div class="trend-amount">₹${Math.abs(monthDetail.months[0])}</div>
+                                <div class="jan-trendBar trendBar" style="background-color:${monthDetail.months[0] < 0 ? "red" : "green"};
+                                height:${(Math.abs(monthDetail.months[0]) / monthDetail.maxi) * 100}%;"></div>
                                 <div class="trend-month">Jan</div>
                             </div>
 
                             <div class="feb trend">
-                                <div class="trend-amount">₹${Math.abs(months[1])}</div>
-                                <div class="feb-trendBar trendBar" style="background-color:${months[1] < 0 ? "red" : "green"};
-                                  height:${(Math.abs(months[1])/maxi) * 100}%;"></div>
+                                <div class="trend-amount">₹${Math.abs(monthDetail.months[1])}</div>
+                                <div class="feb-trendBar trendBar" style="background-color:${monthDetail.months[1] < 0 ? "red" : "green"};
+                                  height:${(Math.abs(monthDetail.months[1]) / monthDetail.maxi) * 100}%;"></div>
                                 <div class="trend-month">Feb</div>
                             </div>
                             <div class="mar trend">
-                                <div class="trend-amount">₹${Math.abs(months[2])}</div>
-                                <div class="mar-trendBar trendBar" style="background-color:${months[2] < 0 ? "red" : "green"};
-                                  height:${(Math.abs(months[2])/maxi) * 100}%;"></div>
+                                <div class="trend-amount">₹${Math.abs(monthDetail.months[2])}</div>
+                                <div class="mar-trendBar trendBar" style="background-color:${monthDetail.months[2] < 0 ? "red" : "green"};
+                                  height:${(Math.abs(monthDetail.months[2]) / monthDetail.maxi) * 100}%;"></div>
                                 <div class="trend-month">Mar</div>
                             </div>
                             <div class="apr trend">
-                                <div class="trend-amount">₹${Math.abs(months[3])}</div>
-                                <div class="apr-trendBar trendBar" style="background-color:${months[3] < 0 ? "red" : "green"}; 
-                                  height:${(Math.abs(months[3])/maxi ) * 100}%;"></div>
+                                <div class="trend-amount">₹${Math.abs(monthDetail.months[3])}</div>
+                                <div class="apr-trendBar trendBar" style="background-color:${monthDetail.months[3] < 0 ? "red" : "green"}; 
+                                  height:${(Math.abs(monthDetail.months[3]) / monthDetail.maxi) * 100}%;"></div>
                                 <div class="trend-month">Apr</div>
                             </div>
                             <div class="may trend">
-                                <div class="trend-amount">₹${Math.abs(months[4])}</div>
-                                <div class="may-trendBar trendBar" style="background-color:${months[4] < 0 ? "red" : "green"};
-                                  height:${(Math.abs(months[4])/maxi ) * 100}%;"></div>
+                                <div class="trend-amount">₹${Math.abs(monthDetail.months[4])}</div>
+                                <div class="may-trendBar trendBar" style="background-color:${monthDetail.months[4] < 0 ? "red" : "green"};
+                                  height:${(Math.abs(monthDetail.months[4]) / monthDetail.maxi) * 100}%;"></div>
                                 <div class="trend-month">May</div>
                             </div>
                             <div class="jun trend">
-                                <div class="trend-amount">₹${Math.abs(months[5])}</div>
-                                <div class="jun-trendBar trendBar" style="background-color:${months[5] < 0 ? "red" : "green"};
-                                  height:${(Math.abs(months[5])/maxi ) * 100}%;"></div>
+                                <div class="trend-amount">₹${Math.abs(monthDetail.months[5])}</div>
+                                <div class="jun-trendBar trendBar" style="background-color:${monthDetail.months[5] < 0 ? "red" : "green"};
+                                  height:${(Math.abs(monthDetail.months[5]) / monthDetail.maxi) * 100}%;"></div>
                                 <div class="trend-month">Jun</div>
                             </div>`
     document.querySelector('.trend-info').innerHTML = trendCard;
+    console.log(trendCard);
 }
 monthlyTrend();
 
+// Insights
+function Insights() {
+    let insightCard = ``;
+    const maxCategory = categoryMaximum();
+    let monthDetail = monthDetails();
+    const incomeAndExpenseDetails = IncomeAndExpense();
+    const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    insightCard = `
+     <div class="insight-category">
+                            Highest Spendings-<strong>${maxCategory.maximumCategory}</strong>
+                        </div>
+                        <div class="insight-month">
+                            Highest Spend Month-<strong>${month[monthDetail.maxiIndex]}</strong>
+                        </div>
+                        <div class="insight-expenses">
+                            Majority of transactions are ${incomeAndExpenseDetails.majority}
+                        </div>`
 
-
+    document.querySelector('.insight-info').innerHTML = insightCard;
+}
+Insights();
 // Add Button
 document.querySelector('.addButton').addEventListener('click', () => {
     document.querySelector('.overlay').classList.add('toggle');
@@ -160,6 +222,9 @@ document.querySelector('.submit-button').addEventListener('click', () => {
     storeData();
     SummaryCards();
     categoryChart();
+    monthlyTrend();
+    Insights();
+
 })
 
 // Cancel button
