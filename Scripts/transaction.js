@@ -40,7 +40,7 @@ export function storeData() {
             transactionDate: dateValue
         });
         tableData();
-        document.querySelector('.transactions').classList.remove('toggle');
+        document.querySelector('.overlay').classList.remove('toggle');
     }
 
     Storage();
