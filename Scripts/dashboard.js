@@ -75,16 +75,25 @@ function categoryMaximum() {
             shopping += Number(ele.transactionAmount);
         }
     })
-    let maximum =0;
-    let maximumCategory = 'None';
-    if (travel > food) {
+    let maximum = 0;
+    let maximumCategory = '';
+    let maximumCategoryAmount;
+    if (travel > food && travel > shopping) {
         maximum = travel;
         maximumCategory = 'Travel';
-
+maximumCategoryAmount=travel;
     }
-    else if (shopping > food) {
+    else if (shopping > food && shopping > food) {
         maximum = shopping;
         maximumCategory = 'Shopping';
+maximumCategoryAmount=shopping;
+
+
+    }
+    else if (food > shopping && food > travel) {
+        maximum = food;
+        maximumCategory = 'Food';
+maximumCategoryAmount=food;
 
     }
 
@@ -93,7 +102,8 @@ function categoryMaximum() {
         travel,
         shopping,
         maximum,
-        maximumCategory
+        maximumCategory,
+        maximumCategoryAmount
     };
 }
 // Category Chart
@@ -128,7 +138,7 @@ categoryChart();
 function monthDetails() {
 
     let months = [0, 0, 0, 0, 0, 0];
-
+    let monthExpense = [0, 0, 0, 0, 0];
     transactionData.forEach((ele) => {
 
         const date = new Date(ele.transactionDate);
@@ -136,29 +146,30 @@ function monthDetails() {
         const year = date.getFullYear();
         const month = date.getMonth();
 
-        if (year == 2005 && month <= 5) {
+        if (year == 2026 && month <= 5) {
             if (ele.transactionType == 'Income') {
                 months[month] += Number(ele.transactionAmount);
             }
             else {
+                monthExpense[month] += Number(ele.transactionAmount);
                 months[month] -= Number(ele.transactionAmount);
             }
 
         }
     })
-    let maxiIndex = 0;
     let maxi = Math.abs(months[0]);
+
+
     for (let i = 1; i < months.length; i++) {
         if (maxi < Math.abs(months[i])) {
             maxi = Math.abs(months[i]);
-            maxiIndex = i;
         }
     }
 
     return {
         months,
         maxi,
-        maxiIndex
+        monthExpense
     };
 }
 
@@ -207,25 +218,48 @@ function monthlyTrend() {
 }
 monthlyTrend();
 
+
+
 // Insights
+
+function savingOrOverspentInsight(){
+const savingOrOverspent=IncomeAndExpense();
+const balance=savingOrOverspent.income-savingOrOverspent.expense;
+let result;
+if(balance>0){
+result=`You saved ₹${balance}`;
+}
+else{
+    result=`You overspent ₹${Math.abs(balance)}`;
+}
+return result;
+}
+
 function Insights() {
     let insightCard = ``;
     const maxCategory = categoryMaximum();
-    let monthDetail = monthDetails();
+    let result=savingOrOverspentInsight();
     const incomeAndExpenseDetails = IncomeAndExpense();
     const month = ['January', 'February', 'March', 'April', 'May', 'June'];
-    insightCard = `
+    if (transactionData.length > 0) {
+        document.querySelector('.insights').classList.remove('enable-No-insights');
+
+        insightCard = `
      <div class="insight-category">
-                            Highest Spendings-<strong>${maxCategory.maximumCategory}</strong>
+                            Highest Spendings-<strong>${maxCategory.maximumCategory == '' ? 'none' : maxCategory.maximumCategory}(₹${maxCategory.maximumCategoryAmount})</strong>
                         </div>
-                        <div class="insight-month">
-                            Highest Spend Month-<strong>${month[monthDetail.maxiIndex]}</strong>
+                        <div class="insight-result">
+                            ${result}
                         </div>
                         <div class="insight-expenses">
                             Majority of transactions are ${incomeAndExpenseDetails.majority}
                         </div>`
 
-    document.querySelector('.insight-info').innerHTML = insightCard;
+        document.querySelector('.insight-info').innerHTML = insightCard;
+    }
+    else {
+        document.querySelector('.insights').classList.add('enable-No-insights');
+    }
 }
 Insights();
 // Add Button
@@ -255,12 +289,12 @@ function Filter() {
     const category = document.querySelector('.category-filter');
     const categoryValue = category.value;
 
-    
+
     const type = document.querySelector('.type-filter');
     const typeValue = type.value;
 
     const newCategory = transactionData.filter((f) => {
-        if ((categoryValue == f.transactionCategory || categoryValue == 'category')&&(f.transactionType == typeValue || typeValue == 'all') ) {
+        if ((categoryValue == f.transactionCategory || categoryValue == 'category') && (f.transactionType == typeValue || typeValue == 'all')) {
             return true;
         }
     })
@@ -268,20 +302,27 @@ function Filter() {
 }
 
 
-document.querySelector('.type-filter').addEventListener('click', () => {
+document.querySelector('.type-filter').addEventListener('change', () => {
     const type = Filter();
     tableData(type);
 })
-document.querySelector('.category-filter').addEventListener('click', () => {
+document.querySelector('.category-filter').addEventListener('change', () => {
     const category = Filter();
     tableData(category);
 })
 
-export function tableData(transactionData) {
 
+// Search
+
+
+export function tableData(transactionData) {
+    console.log(transactionData.length);
     let html = ``;
-    transactionData.forEach((ele) => {
-        html += `
+    if (transactionData.length > 0) {
+
+        document.querySelector('.transactions').classList.remove('enable-no-transaction');
+        transactionData.forEach((ele) => {
+            html += `
         <div class="table-data">
             <div class="date-data">${ele.transactionDate}</div>
             <div class="category-data">${ele.transactionCategory}</div>
@@ -290,8 +331,14 @@ export function tableData(transactionData) {
         </div>
         
         `
-    })
-    document.querySelector('.transaction-table-data').innerHTML = html;
+        })
+        document.querySelector('.transaction-table-data').innerHTML = html;
+    }
+    else {
+
+        document.querySelector('.transactions').classList.add('enable-no-transaction');
+
+
+    }
 }
 tableData(transactionData);
-console.log(transactionData);

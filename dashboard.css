@@ -52,6 +52,9 @@ body {
     border-radius: 10px;
     background-color: white;
 }
+.summary-card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
 
 .balance-value {
     font-size: xx-large;
@@ -92,6 +95,10 @@ body {
     box-shadow: 0 4px 12px rgba(11, 11, 11, 0.08);
     border-radius: 10px;
     background-color: white;
+    
+}
+.chart:hover {
+     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 /* Category chart */
@@ -168,6 +175,17 @@ body {
     background-color: white;
 }
 
+.no-insights{
+    display: none;
+}
+.enable-No-insights .no-insights{
+    display: initial;
+    display: flex;
+    justify-content: center;
+    color: gray;
+    height: 80px;
+    align-items: center;
+}
 .insight-title {
     font-weight: bold;
     font-size: large;
@@ -180,10 +198,22 @@ body {
 /* Transactions */
 .transactions {
     padding: 20px 40px;
-    border: 2px solid;
     /* height: 300px; */
     margin-top: 70px;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(11, 11, 11, 0.08);
+    min-height: 200px;
+}
+.noTransaction{
+    display: none;
+}
+.enable-no-transaction .noTransaction {
+    display:initial ;
+    display: flex;
+    justify-content: center;
+    color: gray;
+    align-items: center;
 }
 
 .transactions-header {
@@ -193,9 +223,11 @@ body {
     align-items: center;
     justify-content: space-between;
 }
-.roleBased .addButton{
+
+.roleBased .addButton {
     display: initial;
 }
+
 .addButton {
     display: none;
     background-color: green;
@@ -224,7 +256,6 @@ body {
 
 
 /* Transaction Table */
-
 
 .table-heading {
     font-weight: bold;
@@ -334,4 +365,22 @@ body {
 .btn:hover {
     box-shadow: 0px 4px 7px gray;
     cursor: pointer;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+
+    }
+
+    .navbar-title {
+        font-size: x-large;
+        width: 150px;
+    }
 }
