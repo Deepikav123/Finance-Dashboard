@@ -139,7 +139,7 @@ Provides meaningful observations:
 1. Clone the repository:
 
 ```
-git clone <your-repo-link>
+git clone <[your-repo-link](https://github.com/Deepikav123/Finance-Dashboard.git)>
 ```
 
 2. Open `index.html` in your browser
