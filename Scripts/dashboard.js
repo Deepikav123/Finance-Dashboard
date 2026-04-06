@@ -311,7 +311,6 @@ document.querySelector('.category-filter').addEventListener('change', () => {
 
 
 export function tableData(transactionData) {
-    console.log(transactionData.length);
     let html = ``;
     transactionData.forEach((ele) => {
         html += `

@@ -10,90 +10,90 @@
 
 <body>
     <div class="dashboard">
-            <!-- Navbar -->
-            <div class="navbar">
-                <div class="navbar-title">
-                    Finance Dashboard
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="navbar-title">
+                Finance Dashboard
+            </div>
+            <div class="role-dropdown">
+                <select class="role">
+                    <option value="Viewer">Viewer</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+        </div>
+        <div class="body-content">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+
+
+                <div class="balance summary-card">
+                    <div class="balance-title card-heading">
+                        Total Balance
+                    </div>
+                    <div class="balance-value value">
+
+                    </div>
                 </div>
-                <div class="role-dropdown">
-                    <select class="role">
-                        <option value="Viewer">Viewer</option>
-                        <option value="Admin">Admin</option>
-                    </select>
+
+                <div class="income summary-card">
+                    <div class="income-title card-heading">
+                        Income
+                    </div>
+                    <div class="income-value value">
+
+                    </div>
+                </div>
+
+                <div class="expenses summary-card">
+                    <div class="expenses-title card-heading">
+                        Expenses
+                    </div>
+                    <div class="expenses-value value">
+
+                    </div>
                 </div>
             </div>
-            <div class="body-content">
-                <!-- Summary Cards -->
-                <div class="summary-cards">
 
 
-                    <div class="balance summary-card">
-                        <div class="balance-title card-heading">
-                            Total Balance
-                        </div>
-                        <div class="balance-value value">
-                            
-                        </div>
+            <!-- Charts -->
+            <div class="charts">
+                <div class="category-chart chart">
+                    <div class="category-heading">Category Charts</div>
+                    <div class="category-container">
+
                     </div>
+                </div>
+                <div class="trend-chart chart">
+                    <div class="trend-heading">Monthly Trends</div>
+                    <div class="trend-info">
 
-                    <div class="income summary-card">
-                        <div class="income-title card-heading">
-                            Income
-                        </div>
-                        <div class="income-value value">
-                         
-                        </div>
+
                     </div>
+                </div>
+            </div>
 
-                    <div class="expenses summary-card">
-                        <div class="expenses-title card-heading">
-                            Expenses
-                        </div>
-                        <div class="expenses-value value">
-                        
-                        </div>
+            <!-- Insights -->
+            <div class="insights">
+                <div class="insight-title">Insights</div>
+                <div class="no-insights">Not enough data to generate insights</div>
+                <div class="insight-info">
+
+                </div>
+            </div>
+
+            <!-- Transactions -->
+            <div class="transactions">
+                <div class="transactions-header">
+                    <div class="transactions-heading">Transactions</div>
+                    <div class="add">
+                        <button class="addButton">Add</button>
                     </div>
                 </div>
 
-
-                <!-- Charts -->
-                <div class="charts">
-                    <div class="category-chart chart">
-                        <div class="category-heading">Category Charts</div>
-                        <div class="category-container">
-                         
-                        </div>
-                    </div>
-                    <div class="trend-chart chart">
-                        <div class="trend-heading">Monthly Trends</div>
-                        <div class="trend-info">
-
-                           
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Insights -->
-                <div class="insights">
-                    <div class="insight-title">Insights</div>
-                    <div class="no-insights">Not enough data to generate insights</div>
-                    <div class="insight-info">
-                       
-                    </div>
-                </div>
-
-                <!-- Transactions -->
-                <div class="transactions">
-                    <div class="transactions-header">
-                        <div class="transactions-heading">Transactions</div>
-                        <div class="add">
-                            <button class="addButton">Add</button>
-                        </div>
-                    </div>
-
-                    <div class="filters">
-                        <div class="filter-title">Filter:</div>
-                        <div class="type-Filter-Conatiner">
+                <div class="filters">
+                    <div class="filter-title">Filter:</div>
+                    <div class="type-Filter-Conatiner">
                         <div class="expense-and-income-filter ">
                             <select name="expense-and-income-dropdown " class="dropdown type-filter">
                                 <option value="all">All</option>
@@ -102,83 +102,83 @@
 
                             </select>
                         </div>
-                        </div>
-
-                        <div class="category-filter-Conatiner">
-                            <select name="category-dropdown " class="dropdown category-filter">
-                                <option value="category">Category</option>
-                                <option value="food">Food</option>
-                                <option value="travel">Travel</option>
-                                <option value="shopping">Shopping</option>
-                            </select>
-                        </div>
                     </div>
-                    <div class="transaction-table">
-                        <div class="transaction-table-heading">
-                            <div class="transaction-date table-heading">Date</div>
-                            <div class="transaction-category table-heading">Category</div>
-                            <div class="transaction-type table-heading">Type</div>
-                            <div class="transaction-amount table-heading">Amount</div>
-                        </div>
-                      
-                        <div class="transaction-table-data">
 
-                        </div>
+                    <div class="category-filter-Conatiner">
+                        <select name="category-dropdown " class="dropdown category-filter">
+                            <option value="category">Category</option>
+                            <option value="food">Food</option>
+                            <option value="travel">Travel</option>
+                            <option value="shopping">Shopping</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="transaction-table">
+                    <div class="transaction-table-heading">
+                        <div class="transaction-date table-heading">Date</div>
+                        <div class="transaction-category table-heading">Category</div>
+                        <div class="transaction-type table-heading">Type</div>
+                        <div class="transaction-amount table-heading">Amount</div>
+                    </div>
+
+                    <div class="transaction-table-data">
+
                     </div>
                 </div>
             </div>
-            
+        </div>
+
 
     </div>
 
 
     <div class="overlay">
-            <div class="modal">
-                        <div class="form-details">
-                            <div class="form-heading">
-                                Add Transactions
-                            </div>
-                            <div class="form-fields">
-                                <div class="form-amount form-field">
-                                    <div class="form-amount-title form-title">Amount</div>
-                                    <input type="number" class="amount-input form-input">
-                                </div>
-                                <div class="form-category form-field">
-                                    <div class="form-category-title form-title">Category</div>
-                                    <select name="form-category " class="category-input form-input">
-                                        <option value="food">Food</option>
-                                        <option value="travel">Travel</option>
-                                        <option value="shopping">Shopping</option>
+        <div class="modal">
+            <div class="form-details">
+                <div class="form-heading">
+                    Add Transactions
+                </div>
+                <div class="form-fields">
+                    <div class="form-amount form-field">
+                        <div class="form-amount-title form-title">Amount</div>
+                        <input type="number" class="amount-input form-input">
+                    </div>
+                    <div class="form-category form-field">
+                        <div class="form-category-title form-title">Category</div>
+                        <select name="form-category " class="category-input form-input">
+                            <option value="food">Food</option>
+                            <option value="travel">Travel</option>
+                            <option value="shopping">Shopping</option>
 
-                                    </select>
-                                </div>
+                        </select>
+                    </div>
 
-                                <div class="form-type form-field">
-                                    <div class="form-type-title form-title">Type</div>
-                                    <select name="form-type" class="form-input type-input">
-                                        <option value="Income">Income</option>
-                                        <option value="Expenses">Expenses</option>
-                                    </select>
-                                </div>
+                    <div class="form-type form-field">
+                        <div class="form-type-title form-title">Type</div>
+                        <select name="form-type" class="form-input type-input">
+                            <option value="Income">Income</option>
+                            <option value="Expenses">Expenses</option>
+                        </select>
+                    </div>
 
-                                <div class="form-date form-field">
-                                    <div class="form-date-title form-title">Date</div>
-                                    <input type="date" class="form-input date-input">
-                                </div>
+                    <div class="form-date form-field">
+                        <div class="form-date-title form-title">Date</div>
+                        <input type="date" class="form-input date-input">
+                    </div>
 
-                                <div class="form-buttons">
-                                    <div class="submit form-button">
-                                        <button class="submit-button btn">Submit</button>
-                                    </div>
-                                    <div class="cancel form-button">
-                                        <button class="cancel-button btn">Cancel</button>
-                                    </div>
-                                </div>
-                            </div>
-
+                    <div class="form-buttons">
+                        <div class="submit form-button">
+                            <button class="submit-button btn">Submit</button>
+                        </div>
+                        <div class="cancel form-button">
+                            <button class="cancel-button btn">Cancel</button>
                         </div>
                     </div>
+                </div>
+
+            </div>
         </div>
+    </div>
     <script src="Scripts/dashboard.js" type="module"></script>
 </body>
 
