@@ -77,23 +77,19 @@ function categoryMaximum() {
     })
     let maximum = 0;
     let maximumCategory = '';
-    let maximumCategoryAmount;
     if (travel > food && travel > shopping) {
         maximum = travel;
         maximumCategory = 'Travel';
-maximumCategoryAmount=travel;
     }
     else if (shopping > food && shopping > food) {
         maximum = shopping;
         maximumCategory = 'Shopping';
-maximumCategoryAmount=shopping;
 
 
     }
     else if (food > shopping && food > travel) {
         maximum = food;
         maximumCategory = 'Food';
-maximumCategoryAmount=food;
 
     }
 
@@ -102,8 +98,7 @@ maximumCategoryAmount=food;
         travel,
         shopping,
         maximum,
-        maximumCategory,
-        maximumCategoryAmount
+        maximumCategory
     };
 }
 // Category Chart
@@ -180,38 +175,38 @@ function monthlyTrend() {
     let trendCard = ` <div class="jan trend">
                                 <div class="trend-amount">₹${Math.abs(monthDetail.months[0])}</div>
                                 <div class="jan-trendBar trendBar" style="background-color:${monthDetail.months[0] < 0 ? "red" : "green"};
-                                height:${(Math.abs(monthDetail.months[0]) / monthDetail.maxi) * 100}%;"></div>
+                                height:${Math.floor((Math.abs(monthDetail.months[0]) / monthDetail.maxi) * 100)}%;"></div>
                                 <div class="trend-month">Jan</div>
                             </div>
 
                             <div class="feb trend">
                                 <div class="trend-amount">₹${Math.abs(monthDetail.months[1])}</div>
                                 <div class="feb-trendBar trendBar" style="background-color:${monthDetail.months[1] < 0 ? "red" : "green"};
-                                  height:${(Math.abs(monthDetail.months[1]) / monthDetail.maxi) * 100}%;"></div>
+                                  height:${Math.floor((Math.abs(monthDetail.months[1]) / monthDetail.maxi) * 100)}%;"></div>
                                 <div class="trend-month">Feb</div>
                             </div>
                             <div class="mar trend">
                                 <div class="trend-amount">₹${Math.abs(monthDetail.months[2])}</div>
                                 <div class="mar-trendBar trendBar" style="background-color:${monthDetail.months[2] < 0 ? "red" : "green"};
-                                  height:${(Math.abs(monthDetail.months[2]) / monthDetail.maxi) * 100}%;"></div>
+                                  height:${Math.floor((Math.abs(monthDetail.months[2]) / monthDetail.maxi) * 100)}%;"></div>
                                 <div class="trend-month">Mar</div>
                             </div>
                             <div class="apr trend">
                                 <div class="trend-amount">₹${Math.abs(monthDetail.months[3])}</div>
                                 <div class="apr-trendBar trendBar" style="background-color:${monthDetail.months[3] < 0 ? "red" : "green"}; 
-                                  height:${(Math.abs(monthDetail.months[3]) / monthDetail.maxi) * 100}%;"></div>
+                                  height:${Math.floor((Math.abs(monthDetail.months[3]) / monthDetail.maxi) * 100)}%;"></div>
                                 <div class="trend-month">Apr</div>
                             </div>
                             <div class="may trend">
                                 <div class="trend-amount">₹${Math.abs(monthDetail.months[4])}</div>
                                 <div class="may-trendBar trendBar" style="background-color:${monthDetail.months[4] < 0 ? "red" : "green"};
-                                  height:${(Math.abs(monthDetail.months[4]) / monthDetail.maxi) * 100}%;"></div>
+                                  height:${Math.floor((Math.abs(monthDetail.months[4]) / monthDetail.maxi) * 100)}%;"></div>
                                 <div class="trend-month">May</div>
                             </div>
                             <div class="jun trend">
                                 <div class="trend-amount">₹${Math.abs(monthDetail.months[5])}</div>
                                 <div class="jun-trendBar trendBar" style="background-color:${monthDetail.months[5] < 0 ? "red" : "green"};
-                                  height:${(Math.abs(monthDetail.months[5]) / monthDetail.maxi) * 100}%;"></div>
+                                  height:${Math.floor((Math.abs(monthDetail.months[5]) / monthDetail.maxi) * 100)}%;"></div>
                                 <div class="trend-month">Jun</div>
                             </div>`
     document.querySelector('.trend-info').innerHTML = trendCard;
@@ -222,23 +217,23 @@ monthlyTrend();
 
 // Insights
 
-function savingOrOverspentInsight(){
-const savingOrOverspent=IncomeAndExpense();
-const balance=savingOrOverspent.income-savingOrOverspent.expense;
-let result;
-if(balance>0){
-result=`You saved ₹${balance}`;
-}
-else{
-    result=`You overspent ₹${Math.abs(balance)}`;
-}
-return result;
+function savingOrOverspentInsight() {
+    const savingOrOverspent = IncomeAndExpense();
+    const balance = savingOrOverspent.income - savingOrOverspent.expense;
+    let result;
+    if (balance > 0) {
+        result = `You saved ₹${balance}`;
+    }
+    else {
+        result = `You overspent ₹${Math.abs(balance)}`;
+    }
+    return result;
 }
 
 function Insights() {
     let insightCard = ``;
     const maxCategory = categoryMaximum();
-    let result=savingOrOverspentInsight();
+    let result = savingOrOverspentInsight();
     const incomeAndExpenseDetails = IncomeAndExpense();
     const month = ['January', 'February', 'March', 'April', 'May', 'June'];
     if (transactionData.length > 0) {
@@ -246,7 +241,7 @@ function Insights() {
 
         insightCard = `
      <div class="insight-category">
-                            Highest Spendings-<strong>${maxCategory.maximumCategory == '' ? 'none' : maxCategory.maximumCategory}(₹${maxCategory.maximumCategoryAmount})</strong>
+                            Highest Spendings-<strong>${maxCategory.maximumCategory == '' ? 'none' : maxCategory.maximumCategory}</strong>
                         </div>
                         <div class="insight-result">
                             ${result}
@@ -318,11 +313,8 @@ document.querySelector('.category-filter').addEventListener('change', () => {
 export function tableData(transactionData) {
     console.log(transactionData.length);
     let html = ``;
-    if (transactionData.length > 0) {
-
-        document.querySelector('.transactions').classList.remove('enable-no-transaction');
-        transactionData.forEach((ele) => {
-            html += `
+    transactionData.forEach((ele) => {
+        html += `
         <div class="table-data">
             <div class="date-data">${ele.transactionDate}</div>
             <div class="category-data">${ele.transactionCategory}</div>
@@ -331,14 +323,8 @@ export function tableData(transactionData) {
         </div>
         
         `
-        })
-        document.querySelector('.transaction-table-data').innerHTML = html;
-    }
-    else {
+    })
+    document.querySelector('.transaction-table-data').innerHTML = html;
 
-        document.querySelector('.transactions').classList.add('enable-no-transaction');
-
-
-    }
 }
 tableData(transactionData);

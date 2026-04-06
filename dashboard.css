@@ -2,6 +2,7 @@ body {
     padding: 0px;
     margin: 0px;
     background-color: #F8FAFC;
+  font-family:  sans-serif;
 }
 
 .dashboard {
@@ -120,7 +121,7 @@ body {
 }
 
 .category-title {
-    width: 35px;
+    width: 45px;
 }
 
 .food-category,
@@ -205,16 +206,6 @@ body {
     box-shadow: 0 4px 12px rgba(11, 11, 11, 0.08);
     min-height: 200px;
 }
-.noTransaction{
-    display: none;
-}
-.enable-no-transaction .noTransaction {
-    display:initial ;
-    display: flex;
-    justify-content: center;
-    color: gray;
-    align-items: center;
-}
 
 .transactions-header {
     font-weight: bold;
@@ -256,6 +247,7 @@ body {
 
 
 /* Transaction Table */
+
 
 .table-heading {
     font-weight: bold;
@@ -308,8 +300,10 @@ body {
 
 .form-details {
     width: 450px;
-    border: 2px solid;
     background-color: white;
+    border-radius: 10px;
+
+
 }
 
 .form-heading {
